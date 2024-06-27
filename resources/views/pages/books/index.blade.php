@@ -21,6 +21,8 @@
             <th class="text-white">Year Published</th>
             <th class="text-white">ISBN</th>
             <th class="text-white">Quantity</th>
+            <th class="text-white">Book Shelf</th>
+            <th class="text-white">Cover</th>
             <th class="text-white">Actions</th>
           </tr>
         </thead>
@@ -34,6 +36,16 @@
             <td>{{ $book->year_published }}</td>
             <td>{{ $book->isbn }}</td>
             <td>{{ $book->quantity }}</td>
+            <td>{{ $book->bookShelf->name ?? 'N/A' }}</td>
+            <td>
+              @if ($book->cover)
+                <a href="{{ Storage::url($book->cover) }}" target="_blank">
+                  <img src="{{ Storage::url($book->cover) }}" alt="Book Cover" class="img-thumbnail" width="50">
+                </a>
+              @else
+                N/A
+              @endif
+            </td>
             <td>
               <a href="{{ route('books.edit', $book->id) }}" class="btn btn-warning btn-sm">Edit</a>
               <form action="{{ route('books.destroy', $book->id) }}" method="POST" style="display:inline-block;">

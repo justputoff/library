@@ -18,7 +18,9 @@ return new class extends Migration
             $table->string('publisher', 100)->nullable();
             $table->year('year_published')->nullable();
             $table->string('isbn', 13)->unique()->nullable();
+            $table->string('cover')->nullable();
             $table->integer('quantity');
+            $table->foreignId('book_shelf_id')->nullable()->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

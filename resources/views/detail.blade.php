@@ -1,29 +1,13 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Library</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Buku</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
         .navbar-custom {
             background-color: #006316;
-        }
-        .banner {
-            background-image: url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 400px;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .banner-text {
-            color: white;
-            font-size: 3rem;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
     </style>
 </head>
@@ -73,29 +57,27 @@
             </div>
         </div>
     </nav>
-
-    <div class="container mt-3">
-        <div class="banner">
-            <div class="banner-text">SELAMAT MEMBACA</div>
-        </div>
-    </div>
-
     <div class="container mt-5">
-        <div class="row">
-            @foreach ($books as $book)
-                <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <img style="max-height: 450px" src="{{ $book->cover ? Storage::url($book->cover) : 'https://via.placeholder.com/200x300?text=No+Image' }}" class="card-img-top" alt="{{ $book->title }}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $book->title }}</h5>
-                            <a href="{{ route('book.detail', $book->id) }}" class="btn btn-success">Detail</a>
-                        </div>
+        <h2 class="mb-4">Detail Buku</h2>
+        <div class="card">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{ $book->cover ? Storage::url($book->cover) : 'https://via.placeholder.com/200x300?text=No+Image' }}" class="img-fluid rounded-start" alt="{{ $book->title }}">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $book->title }}</h5>
+                        <p class="card-text"><strong>Penulis:</strong> {{ $book->author }}</p>
+                        <p class="card-text"><strong>Penerbit:</strong> {{ $book->publisher }}</p>
+                        <p class="card-text"><strong>Tahun Terbit:</strong> {{ $book->year_published }}</p>
+                        <p class="card-text"><strong>Book Shelf:</strong> {{ $book->bookShelf->name ?? 'N/A' }}</p>
+                        <a href="{{ route('peminjaman') }}" class="btn btn-primary">Kembali</a>
                     </div>
                 </div>
-            @endforeach
+            </div>
         </div>
     </div>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

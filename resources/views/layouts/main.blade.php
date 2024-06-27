@@ -33,6 +33,7 @@
 
     <!-- Icons. Uncomment required icon fonts -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/boxicons.css') }}" />
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     
     <!-- Core CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/core.css') }}" class="template-customizer-core-css" />
@@ -88,19 +89,119 @@
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
-        @include('layouts.navbar');
+                <!-- Menu -->
+                <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+                  <div class="app-brand demo d-flex" style="height:100px">
+                    <a href="/" class="app-brand-link m-auto">
+                      <span class="app-brand-logo demo">
+                            <img src="{{ asset('assets/img/logo.svg') }}" alt="" style="width: 100px">
+                      </span>
+                      {{-- <span class="demo menu-text fw-bolder ms-2" style="font-size: 15px">E-LIBRARY</span> --}}
+                    </a>
+        
+                    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+                      <i class="bx bx-chevron-left bx-sm align-middle"></i>
+                    </a>
+                  </div>
+        
+                  <div class="menu-inner-shadow"></div>
+        
+                  <ul class="menu-inner py-1">
+                    <!-- Dashboard -->
+                    <li class="menu-item">
+                      <a href="{{ route('dashboard') }}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bxs-home"></i>
+                        <div data-i18n="Analytics">Dashboard</div>
+                      </a>
+                    </li>
+                    <!-- Users -->
+                    <li class="menu-item {{ Route::is('users*') ? 'active' : '' }}">
+                      <a href="{{ route('users.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bxs-user"></i>
+                        <div data-i18n="Analytics">Users</div>
+                      </a>
+                    </li>
+                    <!-- Members -->
+                    <li class="menu-item {{ Route::is('members*') ? 'active' : '' }}">
+                      <a href="{{ route('members.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bxs-group"></i>
+                        <div data-i18n="Analytics">Daftar Anggota</div>
+                      </a>
+                    </li>
+                    <!-- Books -->
+                    <li class="menu-item {{ Route::is('books*') ? 'active' : '' }}">
+                      <a href="{{ route('books.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bxs-book"></i>
+                        <div data-i18n="Analytics">Daftar Buku</div>
+                      </a>
+                    </li>
+                    <!-- Loans -->
+                    <li class="menu-item {{ Route::is('loans*') ? 'active' : '' }}">
+                      <a href="{{ route('loans.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bxs-bookmark"></i>
+                        <div data-i18n="Analytics">Peminjaman</div>
+                      </a>
+                    </li>
+                    <!-- Visitors -->
+                    <li class="menu-item {{ Route::is('visitors*') ? 'active' : '' }}">
+                      <a href="{{ route('visitors.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bxs-user-check"></i>
+                        <div data-i18n="Analytics">Daftar Kunjungan</div>
+                      </a>
+                    </li>
+                    <!-- Book Shelves -->
+                    <li class="menu-item {{ Route::is('book_shelves*') ? 'active' : '' }}">
+                      <a href="{{ route('book_shelves.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bxs-book-content"></i>
+                        <div data-i18n="Analytics">Rak Buku</div>
+                      </a>
+                    </li>
+                    </ul>
+                </aside>
+                <!-- / Menu -->
 
         <!-- Layout container -->
         <div class="layout-page">
 
-            @include('layouts.topbar')
+          <!-- Navbar -->
+
+        <nav
+          class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center" style="background-color: #006316 !important"
+          id="layout-navbar"
+        >
+          <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+            <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+              <i class="bx bx-menu bx-sm"></i>
+            </a>
+          </div>
+
+          <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+            <ul class="navbar-nav flex-row align-items-center ms-auto">
+              <li class="nav-item mt-1 text-white">{{ Auth::user()->name }}</li>
+              <li class="nav-item">
+                <form action="{{ route('logout') }}" method="POST">
+                  @csrf
+                  <button class="dropdown-item text-white">
+                    <span class="align-middle">Log Out</span>
+                  </button>
+              </form>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <!-- / Navbar -->
 
           <!-- Content wrapper -->
           <div class="content-wrapper">
            
             @yield('content')
 
-            @include('layouts.footer')
+           <!-- Footer -->
+            <footer class="content-footer footer bg-footer-theme">
+            <p class="text-center">Copyright @ 2024 E-Library</p>
+            </footer>
+            <!-- / Footer -->
 
             <div class="content-backdrop fade"></div>
           </div>

@@ -57,28 +57,34 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         let bookIndex = {{ count($loan->loanDetails) }};
+        const booksTable = document.getElementById('booksTable').getElementsByTagName('tbody')[0];
+        const addBookButton = document.getElementById('addBook');
 
-        <div class="row mb-3">
-            <div class="col-md-6">
-                <label for="publisher" class="form-label">Publisher</label>
-                <input type="text" class="form-control" id="publisher" name="publisher" value="{{ $book->publisher }}" required>
-            </div>
-            <div class="col-md-6">
-                <label for="year_published" class="form-label">Year Published</label>
-                <input type="number" class="form-control" id="year_published" name="year_published" value="{{ $book->year_published }}" required>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-md-6">
-                <label for="isbn" class="form-label">ISBN</label>
-                <input type="text" class="form-control" id="isbn" name="isbn" value="{{ $book->isbn }}" required>
-            </div>
-            <div class="col-md-6">
-                <label for="quantity" class="form-label">Quantity</label>
-                <input type="number" class="form-control" id="quantity" name="quantity" value="{{ $book->quantity }}" required>
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Update</button>
-    </form>
-</div>
+        addBookButton.addEventListener('click', function () {
+            const newRow = booksTable.insertRow();
+            newRow.innerHTML = `
+                <tr>
+                    <td>
+                        <select class="form-control" name="books[${bookIndex}][book_id]" required>
+                            @foreach($books as $book)
+                                <option value="{{ $book->id }}">{{ $book->title }}</option>
+                            @endforeach
+                        </select>
+                    </td>
+                    <td><input type="date" class="form-control" name="books[${bookIndex}][loan_date]" required></td>
+                    <td><input type="date" class="form-control" name="books[${bookIndex}][due_date]" required></td>
+                    <td><input type="number" class="form-control" name="books[${bookIndex}][quantity]" required></td>
+                    <td><button type="button" class="btn btn-danger btn-sm remove-book">Remove</button></td>
+                </tr>
+            `;
+            bookIndex++;
+        });
+
+        booksTable.addEventListener('click', function (event) {
+            if (event.target.classList.contains('remove-book')) {
+                event.target.closest('tr').remove();
+            }
+        });
+    });
+</script>
 @endsection

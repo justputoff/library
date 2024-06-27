@@ -12,6 +12,15 @@ class BookSeeder extends Seeder
      */
     public function run(): void
     {
+        // Create bookshelves
+        DB::table('book_shelves')->insert([
+            ['name' => 'Fiction'],
+            ['name' => 'Non-Fiction'],
+            ['name' => 'Science'],
+            ['name' => 'History'],
+            ['name' => 'Biography'],
+        ]);
+
         // Create books
         DB::table('books')->insert([
             [
@@ -21,6 +30,7 @@ class BookSeeder extends Seeder
                 'year_published' => 1925,
                 'isbn' => '9780743273565',
                 'quantity' => 10,
+                'book_shelf_id' => 1, // Fiction
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -31,6 +41,7 @@ class BookSeeder extends Seeder
                 'year_published' => 1960,
                 'isbn' => '9780061120084',
                 'quantity' => 8,
+                'book_shelf_id' => 1, // Fiction
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -41,6 +52,7 @@ class BookSeeder extends Seeder
                 'year_published' => 1949,
                 'isbn' => '9780451524935',
                 'quantity' => 15,
+                'book_shelf_id' => 1, // Fiction
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -51,6 +63,7 @@ class BookSeeder extends Seeder
                 'year_published' => 1813,
                 'isbn' => '9781503290563',
                 'quantity' => 12,
+                'book_shelf_id' => 1, // Fiction
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -61,6 +74,7 @@ class BookSeeder extends Seeder
                 'year_published' => 1951,
                 'isbn' => '9780316769488',
                 'quantity' => 7,
+                'book_shelf_id' => 1, // Fiction
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

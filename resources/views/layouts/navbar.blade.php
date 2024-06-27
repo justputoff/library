@@ -104,6 +104,20 @@
                   <div data-i18n="Analytics">Loans</div>
                 </a>
               </li>
+              <!-- Visitors -->
+              <li class="menu-item {{ Route::is('visitors*') ? 'active' : '' }}">
+                <a href="{{ route('visitors.index') }}" class="menu-link">
+                  <i class="menu-icon tf-icons bx bxs-user-check"></i>
+                  <div data-i18n="Analytics">Visitors</div>
+                </a>
+              </li>
+              <!-- Book Shelves -->
+              <li class="menu-item {{ Route::is('book_shelves*') ? 'active' : '' }}">
+                <a href="{{ route('book_shelves.index') }}" class="menu-link">
+                  <i class="menu-icon tf-icons bx bxs-book-content"></i>
+                  <div data-i18n="Analytics">Book Shelves</div>
+                </a>
+              </li>
             </ul>
           </aside>
           <!-- / Menu -->

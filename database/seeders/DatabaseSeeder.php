@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         DB::table('roles')->truncate();
         DB::table('members')->truncate();
         DB::table('books')->truncate();
+        DB::table('book_shelves')->truncate();
         // Add other tables as needed
 
         // Enable foreign key checks
