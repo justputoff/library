@@ -18,13 +18,22 @@ class DashboardController extends Controller
         $totalBooks = Book::count();
         $totalMembers = Member::count();
 
-        // Mengambil data untuk chart
-        $loansPerMonth = LoanDetail::selectRaw('strftime("%m", created_at) as month, COUNT(*) as count')
-            ->groupBy('month')
-            ->orderBy('month')
-            ->get()
-            ->pluck('count', 'month')
-            ->toArray();
+        // Menyesuaikan query berdasarkan jenis database
+        if (config('database.default') === 'pgsql') {
+            $loansPerMonth = LoanDetail::selectRaw('TO_CHAR(created_at, \'MM\') as month, COUNT(*) as count')
+                ->groupBy('month')
+                ->orderBy('month')
+                ->get()
+                ->pluck('count', 'month')
+                ->toArray();
+        } else {
+            $loansPerMonth = LoanDetail::selectRaw('strftime(\'%m\', created_at) as month, COUNT(*) as count')
+                ->groupBy('month')
+                ->orderBy('month')
+                ->get()
+                ->pluck('count', 'month')
+                ->toArray();
+        }
 
         // Menyiapkan data untuk chart
         $months = [];
