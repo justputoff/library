@@ -54,6 +54,14 @@ class MemberController extends Controller
         return redirect()->route('members.index')->with('success', 'Member updated successfully');
     }
 
+    public function updateStatus(Request $request, $id)
+    {
+        $member = Member::findOrFail($id);
+        $member->update(['status' => $request->status]);
+
+        return redirect()->route('members.index')->with('success', 'Member status updated successfully');
+    }
+
     public function destroy($id)
     {
         $member = Member::findOrFail($id);

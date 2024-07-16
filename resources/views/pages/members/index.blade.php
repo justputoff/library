@@ -19,6 +19,7 @@
             <th class="text-white">Email</th>
             <th class="text-white">Address</th>
             <th class="text-white">Phone</th>
+            <th class="text-white">Status</th>
             <th class="text-white">Actions</th>
           </tr>
         </thead>
@@ -30,6 +31,14 @@
             <td>{{ $member->user->email }}</td>
             <td>{{ $member->address }}</td>
             <td>{{ $member->phone }}</td>
+            <td>
+              <form action="{{ route('members.updateStatus', $member->id) }}" method="POST" style="display:inline-block;">
+                @csrf
+                @method('PATCH')
+                <input type="hidden" name="status" value="{{ $member->status == 'active' ? 'inactive' : 'active' }}">
+                <button type="submit" class="btn btn-success btn-sm {{ $member->status == 'active' ? 'btn-success' : 'btn-danger' }}">{{ $member->status == 'active' ? 'Boleh Pinjam' : 'Tidak Boleh Pinjam' }}</button>
+              </form>
+            </td>
             <td>
               <a href="{{ route('members.edit', $member->id) }}" class="btn btn-warning btn-sm">Edit</a>
               <form action="{{ route('members.destroy', $member->id) }}" method="POST" style="display:inline-block;">

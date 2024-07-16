@@ -18,6 +18,8 @@
             <th class="text-white">Member</th>
             <th class="text-white">Loan Date</th>
             <th class="text-white">Due Date</th>
+            <th class="text-white">Return Date</th>
+            <th class="text-white">Books</th>
             <th class="text-white">Status</th>
             <th class="text-white">Actions</th>
           </tr>
@@ -29,6 +31,14 @@
             <td>{{ $loan->member->user->name }}</td>
             <td>{{ $loan->loanDetails->first()->loan_date ?? 'N/A' }}</td>
             <td>{{ $loan->loanDetails->first()->due_date ?? 'N/A' }}</td>
+            <td>{{ $loan->returnDetail->return_date ?? 'N/A' }}</td>
+            <td>
+              <ul>
+              @foreach ($loan->loanDetails as $detail)
+                <li>{{ $detail->book->title }}</li>
+              @endforeach
+            </ul>
+            </td>
             <td>
               @if ($loan->status == 'completed')
                 <span class="badge bg-success">Completed</span>

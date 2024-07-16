@@ -9,7 +9,7 @@ class Member extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['address', 'phone', 'user_id'];
+    protected $fillable = ['address', 'phone', 'user_id', 'status'];
 
     public function loans()
     {

@@ -20,7 +20,7 @@ class LoanController extends Controller
 
     public function create()
     {
-        $members = Member::with('user')->get();
+        $members = Member::with('user')->where('status', 'active')->get();
         $books = Book::all();
         return view('pages.loans.create', compact('members', 'books'));
     }

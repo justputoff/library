@@ -69,6 +69,7 @@
                         <th>Judul Buku</th>
                         <th>Tanggal Pinjam</th>
                         <th>Tanggal Batas Pengembalian</th>
+                        <th>Tanggal Pengembalian</th>
                         <th>Status Pengembalian</th>
                         <th>Detail</th>
                     </tr>
@@ -82,6 +83,7 @@
                                 <td>{{ $detail->book->title }}</td>
                                 <td>{{ $detail->loan_date }}</td>
                                 <td>{{ $detail->due_date }}</td>
+                                <td>{{ $detail->returnDetail->return_date ?? 'Belum di kembalikan' }}</td>
                                 <td>{{ $detail->returnDetail ? 'Sudah Dikembalikan' : 'Belum Dikembalikan' }}</td>
                                 <td><a href="{{ route('book.detail', $detail->book->id) }}" class="btn btn-info btn-sm">Detail</a></td>
                             </tr>

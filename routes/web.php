@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/members/{member}/edit', [MemberController::class, 'edit'])->name('members.edit');
     Route::patch('/members/{member}', [MemberController::class, 'update'])->name('members.update');
     Route::delete('/members/{member}', [MemberController::class, 'destroy'])->name('members.destroy');
+    Route::patch('/members/{member}/status', [MemberController::class, 'updateStatus'])->name('members.updateStatus');
 
     // Book routes
     Route::get('/books', [BookController::class, 'index'])->name('books.index');
